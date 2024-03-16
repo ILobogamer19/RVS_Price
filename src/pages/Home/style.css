@@ -4,8 +4,7 @@ body {
 
 /* Itens do Banner em Geral */
 .Banner_Topo {
-  border: 2px solid black;
-  font-size: 25px;
+  border: 0.2vw solid black;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -13,36 +12,54 @@ body {
   background-color: rgb(153, 0, 0);
 }
 .Banner_Topo div {
-  font-size: 25px;
+  font-size: 1vw;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 10px 0 0 0;
+  margin: 1vw 0 0 0;
 }
 
 /* Itens da parte da Barra de pesquisa */
 .Logo_Site {
-  width: 150px;
-  margin: 0 15px 0 0;
+  width: 8vw;
+  margin: 0 1vw 0 0;
 }
 .Pesquisa {
   align-items: flex-start;
   justify-content: flex-start;
-  padding: 20px 275px 20px 10px;
+  padding: 1vw 5vw 1vw 0.8vw;
+  width: 20vw;
+  font-size: 1vw;
 }
 .Img_Lupa {
   position: relative;
-  width: 30px;
-  right: 35px;
-  cursor: text;
+  width: 1.5vw;
+  right: 2vw;
 }
 
 /* Links para navegar no site */
 .Links_Navegacao a {
-  margin: 5px;
+  margin: 0.2vw;
   color: black;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 .Links_Navegacao a:hover {
   color: white;
-  font-size: 30px;
+  font-size: 1.3vw;
+}
+.Link_De_Navegacao_Com_Imagem:hover .Imagem_Inicial {
+  filter: invert(100%);
+  width: 4vw;
+}
+.Imagem_Inicial {
+  display: flex;
+  width: 2.7vw;
+}
+.Links_Navegacao p {
+  margin: 0 1.5vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
