@@ -93,97 +93,43 @@ export default function Navegacao_Entre_Slides() {
   //#endregion
 
   //#region Regras CSS para que funcione a troca de slides sem limitações
-  // useEffect(() => {
-  //   //#region Expressões e Valores numéricos
-  //   const Quantia_De_Imagens_Existentes = Object.keys(Imagens_de_Slide).length;
-  //   const Tamanho_Total_De_Largura = Quantia_De_Imagens_Existentes * 100;
-  //   const Slide_Ocupacao = Math.ceil(100 / Quantia_De_Imagens_Existentes);
-  //   const Localizacao_De_Botoes_De_Avanco_E_Voltar = 26;
-  //   //#endregion
+  useEffect(() => {
+    //#region Expressões e Valores numéricos
+    const Quantia_De_Imagens_Existentes = Object.keys(Imagens_de_Slide).length;
+    const Tamanho_Total_De_Largura = Quantia_De_Imagens_Existentes * 100;
+    const Slide_Ocupacao = Math.ceil(100 / Quantia_De_Imagens_Existentes);
+    const Localizacao_De_Botoes_De_Avanco_E_Voltar = 26;
+    //#endregion
 
-  //   console.log(Localizacao_De_Botoes_De_Avanco_E_Voltar);
+    const Estilo_Banner_De_Slides = document.styleSheets[2];
 
-  //   const Estilo_Banner_De_Slides = document.styleSheets[2];
+    //.Slides
+    Estilo_Banner_De_Slides.insertRule(
+      ".Slides {display: flex; width: " +
+        Tamanho_Total_De_Largura +
+        "%; height: 100%;}",
+      0
+    );
 
-  //   //.Imagens_De_Apresentacoes
-  //   Estilo_Banner_De_Slides.insertRule(
-  //     ".Imagens_De_Apresentacoes {height: 50vh; width: 70vw; border-radius: 3vw; overflow: hidden; position: absolute; left: 50%; transform: translate(-50%, 5px);}",
-  //     0
-  //   );
+    //.Slide
+    Estilo_Banner_De_Slides.insertRule(
+      ".Slide {width: " + Slide_Ocupacao + "%; transition: 0.6s;}",
+      0
+    );
 
-  //   //.Slides
-  //   Estilo_Banner_De_Slides.insertRule(
-  //     ".Slides {display: flex; width: " +
-  //       Tamanho_Total_De_Largura +
-  //       "%; height: 100%;}",
-  //     0
-  //   );
-
-  //   //.Slide
-  //   Estilo_Banner_De_Slides.insertRule(
-  //     ".Slide {width: " + Slide_Ocupacao + "%; transition: 0.6s;}",
-  //     0
-  //   );
-
-  //   //.Slide img
-  //   Estilo_Banner_De_Slides.insertRule(
-  //     ".Slide img {width: 100%; height: 100%;}",
-  //     0
-  //   );
-
-  //   //.Botao_Slide_Anterior
-  //   Estilo_Banner_De_Slides.insertRule(
-  //     ".Botao_Slide_Anterior {position: absolute; left: -" +
-  //       Localizacao_De_Botoes_De_Avanco_E_Voltar +
-  //       "vw; top: -47vh; width: 4vw; height: 51vh; background-color: rgba(255, 0, 0, 0); border: 0px; font-size: 4vw;}",
-  //     0
-  //   );
-
-  //   //.Botao_Proximo_Slide
-  //   Estilo_Banner_De_Slides.insertRule(
-  //     ".Botao_Proximo_Slide {position: absolute; right: -" +
-  //       Localizacao_De_Botoes_De_Avanco_E_Voltar +
-  //       "vw; border-radius: 0 2vw 2vw 0; top: -47vh; width: 4vw; height: 51vh; background-color: rgba(255, 0, 0, 0); border: 0px; font-size: 4vw;}",
-  //     0
-  //   );
-
-  //   //.Input_Tipo_Radio_Alteracao_Slide
-  //   Estilo_Banner_De_Slides.insertRule(
-  //     ".Input_Tipo_Radio_Alteracao_Slide {display: none;}",
-  //     0
-  //   );
-
-  //   //.Navegacao_Entre_Slides
-  //   Estilo_Banner_De_Slides.insertRule(
-  //     ".Navegacao_Entre_Slides {position: absolute; bottom: -23px; left: 50%; transform: translate(-50%, -50%); display: flex;}",
-  //     0
-  //   );
-
-  //   //.Barra_De_Navegacao_De_Imagem
-  //   Estilo_Banner_De_Slides.insertRule(
-  //     ".Barra_De_Navegacao_De_Imagem {width: 5vw; height: 2vh; border: 0.2vw solid black; border-radius: 5px; cursor: pointer; margin: 6px; transition: 0.4s;}",
-  //     0
-  //   );
-
-  //   //.Barra_De_Navegacao_De_Imagem:hover
-  //   Estilo_Banner_De_Slides.insertRule(
-  //     ".Barra_De_Navegacao_De_Imagem:hover {background-color: rgb(255, 255, 255);}",
-  //     0
-  //   );
-
-  //   Imagens_de_Slide.map((item) => {
-  //     const Valor_Correspondente_Locomocao = -((item.Id - 1) * Slide_Ocupacao);
-  //     //Transição de itens
-  //     Estilo_Banner_De_Slides.insertRule(
-  //       "#Slide_" +
-  //         item.Id +
-  //         ":checked ~ .Primeiro_Slide {margin-left: " +
-  //         Valor_Correspondente_Locomocao +
-  //         "%;}",
-  //       0
-  //     );
-  //   });
-  // }, []);
+    Imagens_de_Slide.map((item) => {
+      const Valor_Correspondente_Locomocao = -((item.Id - 1) * Slide_Ocupacao);
+      //Transição de itens
+      Estilo_Banner_De_Slides.insertRule(
+        "#Slide_" +
+          item.Id +
+          ":checked ~ .Primeiro_Slide {margin-left: " +
+          Valor_Correspondente_Locomocao +
+          "%;}",
+        0
+      );
+    });
+  }, []);
   //#endregion
 
   //#region Retorno JSX
