@@ -8,7 +8,7 @@ export default function Banner_Apresentacoes() {
       <div className="Slides">
         <Input_Tipo_Radio />
         <Imagens_Do_Slide />
-        {/* <Navegacao_Entre_Slides /> */}
+        <Navegacao_Entre_Slides />
       </div>
     </div>
   );

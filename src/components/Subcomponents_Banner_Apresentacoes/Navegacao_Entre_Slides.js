@@ -194,39 +194,37 @@ export default function Navegacao_Entre_Slides() {
       </button>
       {Imagens_de_Slide.map((item) => {
         return (
-          <>
-            <label
-              className="Barra_De_Navegacao_De_Imagem"
-              htmlFor={"Slide_" + item.Id}
-              key={item.Id + item.Imagem}
-              id={"Barra_De_Pesquisa_" + item.Id}
-              style={
-                item.Id === 1
-                  ? { backgroundColor: "rgb(29, 29, 29)" }
-                  : { backgroundColor: "" }
-              }
-              onClick={() => {
-                setTemporizador_Para_Troca_Automatica(10);
-                setTimeout(() => {
-                  var Todos_Os_Input_Radio_De_Navegacao =
-                    document.querySelectorAll(
-                      ".Input_Tipo_Radio_Alteracao_Slide"
-                    );
+          <label
+            className="Barra_De_Navegacao_De_Imagem"
+            htmlFor={"Slide_" + item.Id}
+            key={item.Id + item.Imagem}
+            id={"Barra_De_Pesquisa_" + item.Id}
+            style={
+              item.Id === 1
+                ? { backgroundColor: "rgb(29, 29, 29)" }
+                : { backgroundColor: "" }
+            }
+            onClick={() => {
+              setTemporizador_Para_Troca_Automatica(10);
+              setTimeout(() => {
+                var Todos_Os_Input_Radio_De_Navegacao =
+                  document.querySelectorAll(
+                    ".Input_Tipo_Radio_Alteracao_Slide"
+                  );
 
-                  Todos_Os_Input_Radio_De_Navegacao.forEach((item) => {
-                    var Label_Correspondente = document.getElementById(
-                      "Barra_De_Pesquisa_" + item.value
-                    );
-                    Label_Correspondente.style.backgroundColor = "";
-                    if (item.checked) {
-                      Label_Correspondente.style.backgroundColor =
-                        "rgb(29, 29, 29)";
-                    }
-                  });
-                }, 50);
-              }}
-            ></label>
-          </>
+                Todos_Os_Input_Radio_De_Navegacao.forEach((item) => {
+                  var Label_Correspondente = document.getElementById(
+                    "Barra_De_Pesquisa_" + item.value
+                  );
+                  Label_Correspondente.style.backgroundColor = "";
+                  if (item.checked) {
+                    Label_Correspondente.style.backgroundColor =
+                      "rgb(29, 29, 29)";
+                  }
+                });
+              }, 50);
+            }}
+          ></label>
         );
       })}
       <button
