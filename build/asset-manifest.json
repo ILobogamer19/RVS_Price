@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.css": "/static/css/main.700c06f7.css",
+    "main.js": "/static/js/main.a904a483.js",
+    "static/media/RVS_Price.png": "/static/media/RVS_Price.412d33a9108bd127d0d6.png",
+    "static/media/Mercados.png": "/static/media/Mercados.ba7173aaec42f5ab448a.png",
+    "static/media/Promocoes.png": "/static/media/Promocoes.bf651573f32993195ee1.png",
+    "static/media/Menor_Preco.png": "/static/media/Menor_Preco.66c7b43d68e48e2136f0.png",
+    "static/media/Lupa.png": "/static/media/Lupa.fee659e409af3bfd3875.png",
+    "static/media/Cadastre_Seu_Mercado.png": "/static/media/Cadastre_Seu_Mercado.a7b402a737ff387d21e0.png",
+    "static/media/Carrinho.png": "/static/media/Carrinho.b587c539a1181e50be01.png",
+    "index.html": "/index.html",
+    "main.700c06f7.css.map": "/static/css/main.700c06f7.css.map",
+    "main.a904a483.js.map": "/static/js/main.a904a483.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.700c06f7.css",
+    "static/js/main.a904a483.js"
+  ]
+}
