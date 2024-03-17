@@ -9,7 +9,8 @@ body {
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  background-color: rgb(153, 0, 0);
+  background-color: rgb(255, 33, 33);
+  /* background-color: rgb(153, 0, 0); */
 }
 .Banner_Topo div {
   font-size: 1vw;
@@ -44,6 +45,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  font-family: serif;
 }
 .Links_Navegacao a:hover {
   color: white;
@@ -62,4 +64,86 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+/* Seção de Estilização do Banner de Apresentações */
+.Imagens_De_Apresentacoes {
+  height: 50vh;
+  width: 70vw;
+  border-radius: 3vw;
+  overflow: hidden;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, 5px);
+}
+.Slides {
+  display: flex;
+  width: 300%;
+  height: 100%;
+}
+.Slide {
+  width: 34%;
+  transition: 0.6s;
+}
+.Slide img {
+  width: 100%;
+  height: 100%;
+}
+#Slide_1:checked ~ .Primeiro_Slide {
+  margin-left: 0;
+}
+#Slide_2:checked ~ .Primeiro_Slide {
+  margin-left: -34%;
+}
+#Slide_3:checked ~ .Primeiro_Slide {
+  margin-left: -68%;
+}
+#Slide_4:checked ~ .Primeiro_Slide {
+  margin-left: -75%;
+}
+#Slide_5:checked ~ .Primeiro_Slide {
+  margin-left: -80%;
+}
+.Botao_Slide_Anterior {
+  position: absolute;
+  left: -27vw;
+  top: -47vh;
+  width: 4vw;
+  height: 51vh;
+  background-color: rgba(255, 0, 0, 0);
+  border: 0px;
+  font-size: 4vw;
+}
+.Botao_Proximo_Slide {
+  position: absolute;
+  right: -27vw;
+  border-radius: 0 2vw 2vw 0;
+  top: -47vh;
+  width: 4vw;
+  height: 51vh;
+  background-color: rgba(255, 0, 0, 0);
+  border: 0px;
+  font-size: 4vw;
+}
+.Input_Tipo_Radio_Alteracao_Slide {
+  display: none;
+}
+.Navegacao_Entre_Slides {
+  position: absolute;
+  bottom: -23px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+}
+.Barra_De_Navegacao_De_Imagem {
+  width: 5vw;
+  height: 2vh;
+  border: 0.2vw solid black;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 6px;
+  transition: 0.4s;
+}
+.Barra_De_Navegacao_De_Imagem:hover {
+  background-color: rgb(255, 255, 255);
 }
