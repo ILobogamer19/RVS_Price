@@ -93,43 +93,43 @@ export default function Navegacao_Entre_Slides() {
   //#endregion
 
   //#region Regras CSS para que funcione a troca de slides sem limitações
-  useEffect(() => {
-    //#region Expressões e Valores numéricos
-    const Quantia_De_Imagens_Existentes = Object.keys(Imagens_de_Slide).length;
-    const Tamanho_Total_De_Largura = Quantia_De_Imagens_Existentes * 100;
-    const Slide_Ocupacao = Math.ceil(100 / Quantia_De_Imagens_Existentes);
-    const Localizacao_De_Botoes_De_Avanco_E_Voltar = 26;
-    //#endregion
+  // useEffect(() => {
+  //   //#region Expressões e Valores numéricos
+  //   const Quantia_De_Imagens_Existentes = Object.keys(Imagens_de_Slide).length;
+  //   const Tamanho_Total_De_Largura = Quantia_De_Imagens_Existentes * 100;
+  //   const Slide_Ocupacao = Math.ceil(100 / Quantia_De_Imagens_Existentes);
+  //   const Localizacao_De_Botoes_De_Avanco_E_Voltar = 26;
+  //   //#endregion
 
-    const Estilo_Banner_De_Slides = document.styleSheets[2];
+  //   const Estilo_Banner_De_Slides = document.styleSheets[2];
 
-    //.Slides
-    Estilo_Banner_De_Slides.insertRule(
-      ".Slides {display: flex; width: " +
-        Tamanho_Total_De_Largura +
-        "%; height: 100%;}",
-      0
-    );
+  //   //.Slides
+  //   Estilo_Banner_De_Slides.insertRule(
+  //     ".Slides {display: flex; width: " +
+  //       Tamanho_Total_De_Largura +
+  //       "%; height: 100%;}",
+  //     0
+  //   );
 
-    //.Slide
-    Estilo_Banner_De_Slides.insertRule(
-      ".Slide {width: " + Slide_Ocupacao + "%; transition: 0.6s;}",
-      0
-    );
+  //   //.Slide
+  //   Estilo_Banner_De_Slides.insertRule(
+  //     ".Slide {width: " + Slide_Ocupacao + "%; transition: 0.6s;}",
+  //     0
+  //   );
 
-    Imagens_de_Slide.map((item) => {
-      const Valor_Correspondente_Locomocao = -((item.Id - 1) * Slide_Ocupacao);
-      //Transição de itens
-      Estilo_Banner_De_Slides.insertRule(
-        "#Slide_" +
-          item.Id +
-          ":checked ~ .Primeiro_Slide {margin-left: " +
-          Valor_Correspondente_Locomocao +
-          "%;}",
-        0
-      );
-    });
-  }, []);
+  //   Imagens_de_Slide.map((item) => {
+  //     const Valor_Correspondente_Locomocao = -((item.Id - 1) * Slide_Ocupacao);
+  //     //Transição de itens
+  //     Estilo_Banner_De_Slides.insertRule(
+  //       "#Slide_" +
+  //         item.Id +
+  //         ":checked ~ .Primeiro_Slide {margin-left: " +
+  //         Valor_Correspondente_Locomocao +
+  //         "%;}",
+  //       0
+  //     );
+  //   });
+  // }, []);
   //#endregion
 
   //#region Retorno JSX
