@@ -16,20 +16,16 @@ export default function Input_Tipo_Radio() {
       {Imagens_de_Slide.map((item) => {
         return (
           <>
-            {item.Id > 5 ? (
-              alert("Não é possível adicionar mais que 5 slides")
-            ) : (
-              <input
-                type="radio"
-                name="Slides_Control"
-                id={"Slide_" + item.Id}
-                value={item.Id}
-                checked={Input_Radio_Selecionado === item.Id}
-                onChange={Atualizar_O_Input_Selecionado}
-                key={item.Id}
-                className="Input_Tipo_Radio_Alteracao_Slide"
-              />
-            )}
+            <input
+              type="radio"
+              name="Slides_Control"
+              id={"Slide_" + item.Id}
+              value={item.Id}
+              checked={Input_Radio_Selecionado === item.Id}
+              onChange={Atualizar_O_Input_Selecionado}
+              key={item.Id}
+              className="Input_Tipo_Radio_Alteracao_Slide"
+            />
           </>
         );
       })}

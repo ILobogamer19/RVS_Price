@@ -11,11 +11,7 @@ export default function Imagens_Do_Slide() {
             className={"Slide" + (item.Id === 1 ? " Primeiro_Slide" : "")}
             key={item.Imagem}
           >
-            {item.Id > 5 ? (
-              alert("Não é possível adicionar mais que 5 slides")
-            ) : (
-              <img src={item.Imagem} />
-            )}
+            <img src={item.Imagem} />
           </div>
         );
       })}

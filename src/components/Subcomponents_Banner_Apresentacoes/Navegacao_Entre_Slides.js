@@ -1,11 +1,18 @@
+//#region Importes
+import React, { useState, useEffect } from "react";
+//#endregion
+
+//#region Importação de Json
 const Imagens_de_Slide_Json = await fetch("./data/Slides_Apresentacao.json");
-
 const Imagens_de_Slide = await Imagens_de_Slide_Json.json();
+//#endregion
 
+//#region Aplicação de navegação de slides
 export default function Navegacao_Entre_Slides() {
-  var Ultima_Escolhida;
-
+  //#region Função que Avança para o proximo slide quando clicar em um botão ou quando o tempo do temporizador acaba
   function Avancar_Slide() {
+    setTemporizador_Para_Troca_Automatica(10);
+    var Proximo_Input_Radio;
     const Atual_Input_Radio_Selecionado = document.querySelector(
       "input[name='Slides_Control']:checked"
     );
@@ -17,19 +24,19 @@ export default function Navegacao_Entre_Slides() {
     if (
       document.getElementById("Barra_De_Pesquisa_" + Numero_Do_Id_Para_Ativar)
     ) {
-      var Proximo_Input_Radio = document.getElementById(
+      Proximo_Input_Radio = document.getElementById(
         "Barra_De_Pesquisa_" + Numero_Do_Id_Para_Ativar
       );
     } else {
-      var Proximo_Input_Radio = document.getElementById(
-        "Barra_De_Pesquisa_" + 1
-      );
+      Proximo_Input_Radio = document.getElementById("Barra_De_Pesquisa_" + 1);
     }
-
     Proximo_Input_Radio.click();
   }
+  //#endregion
 
+  //#region Função que Volta para o slide anterior quando clicar em um botão
   function Voltar_Slide() {
+    setTemporizador_Para_Troca_Automatica(10);
     var Anterior_Input_Radio;
     const Atual_Input_Radio_Selecionado = document.querySelector(
       "input[name='Slides_Control']:checked"
@@ -48,7 +55,7 @@ export default function Navegacao_Entre_Slides() {
     } else {
       for (var i = 5; i >= 1; i--) {
         if (document.getElementById("Barra_De_Pesquisa_" + i)) {
-          var Anterior_Input_Radio = document.getElementById(
+          Anterior_Input_Radio = document.getElementById(
             "Barra_De_Pesquisa_" + i
           );
           break;
@@ -58,7 +65,128 @@ export default function Navegacao_Entre_Slides() {
 
     Anterior_Input_Radio.click();
   }
+  //#endregion
 
+  //#region Timer de avanço de slide após 10 segundos
+  const [
+    Temporizador_Para_Troca_Automatica,
+    setTemporizador_Para_Troca_Automatica,
+  ] = useState(10);
+
+  useEffect(() => {
+    const Intervalo_De_Troca_De_Slide = setInterval(() => {
+      setTemporizador_Para_Troca_Automatica((Valor_Antigo) => Valor_Antigo - 1);
+    }, 1000);
+
+    return () => clearInterval(Intervalo_De_Troca_De_Slide);
+  }, []);
+
+  useEffect(() => {
+    if (Temporizador_Para_Troca_Automatica === 0) {
+      console.log("Slide sendo avançado...");
+      document.getElementById("Botao_De_Avancar_Para_O_Proximo_Slide").click();
+      if (Temporizador_Para_Troca_Automatica === 0) {
+        setTemporizador_Para_Troca_Automatica(10);
+      }
+    }
+  }, [Temporizador_Para_Troca_Automatica]);
+  //#endregion
+
+  //#region Regras CSS para que funcione a troca de slides sem limitações
+  useEffect(() => {
+    //#region Expressões e Valores numéricos
+    const Quantia_De_Imagens_Existentes = Object.keys(Imagens_de_Slide).length;
+    const Tamanho_Total_De_Largura = Quantia_De_Imagens_Existentes * 100;
+    const Slide_Ocupacao = Math.ceil(100 / Quantia_De_Imagens_Existentes);
+    const Localizacao_De_Botoes_De_Avanco_E_Voltar = 26;
+    //#endregion
+
+    console.log(Localizacao_De_Botoes_De_Avanco_E_Voltar);
+
+    const Estilo_Banner_De_Slides = document.styleSheets[2];
+
+    //.Imagens_De_Apresentacoes
+    Estilo_Banner_De_Slides.insertRule(
+      ".Imagens_De_Apresentacoes {height: 50vh; width: 70vw; border-radius: 3vw; overflow: hidden; position: absolute; left: 50%; transform: translate(-50%, 5px);}",
+      0
+    );
+
+    //.Slides
+    Estilo_Banner_De_Slides.insertRule(
+      ".Slides {display: flex; width: " +
+        Tamanho_Total_De_Largura +
+        "%; height: 100%;}",
+      0
+    );
+
+    //.Slide
+    Estilo_Banner_De_Slides.insertRule(
+      ".Slide {width: " + Slide_Ocupacao + "%; transition: 0.6s;}",
+      0
+    );
+
+    //.Slide img
+    Estilo_Banner_De_Slides.insertRule(
+      ".Slide img {width: 100%; height: 100%;}",
+      0
+    );
+
+    //.Botao_Slide_Anterior
+    Estilo_Banner_De_Slides.insertRule(
+      ".Botao_Slide_Anterior {position: absolute; left: -" +
+        Localizacao_De_Botoes_De_Avanco_E_Voltar +
+        "vw; top: -47vh; width: 4vw; height: 51vh; background-color: rgba(255, 0, 0, 0); border: 0px; font-size: 4vw;}",
+      0
+    );
+
+    //.Botao_Proximo_Slide
+    Estilo_Banner_De_Slides.insertRule(
+      ".Botao_Proximo_Slide {position: absolute; right: -" +
+        Localizacao_De_Botoes_De_Avanco_E_Voltar +
+        "vw; border-radius: 0 2vw 2vw 0; top: -47vh; width: 4vw; height: 51vh; background-color: rgba(255, 0, 0, 0); border: 0px; font-size: 4vw;}",
+      0
+    );
+
+    //.Input_Tipo_Radio_Alteracao_Slide
+    Estilo_Banner_De_Slides.insertRule(
+      ".Input_Tipo_Radio_Alteracao_Slide {display: none;}",
+      0
+    );
+
+    //.Navegacao_Entre_Slides
+    Estilo_Banner_De_Slides.insertRule(
+      ".Navegacao_Entre_Slides {position: absolute; bottom: -23px; left: 50%; transform: translate(-50%, -50%); display: flex;}",
+      0
+    );
+
+    //.Barra_De_Navegacao_De_Imagem
+    Estilo_Banner_De_Slides.insertRule(
+      ".Barra_De_Navegacao_De_Imagem {width: 5vw; height: 2vh; border: 0.2vw solid black; border-radius: 5px; cursor: pointer; margin: 6px; transition: 0.4s;}",
+      0
+    );
+
+    //.Barra_De_Navegacao_De_Imagem:hover
+    Estilo_Banner_De_Slides.insertRule(
+      ".Barra_De_Navegacao_De_Imagem:hover {background-color: rgb(255, 255, 255);}",
+      0
+    );
+
+    Imagens_de_Slide.map((item) => {
+      const Valor_Correspondente_Locomocao = -((item.Id - 1) * Slide_Ocupacao);
+      //Transição de itens
+      Estilo_Banner_De_Slides.insertRule(
+        "#Slide_" +
+          item.Id +
+          ":checked ~ .Primeiro_Slide {margin-left: " +
+          Valor_Correspondente_Locomocao +
+          "%;}",
+        0
+      );
+    });
+  }, []);
+  //#endregion
+
+  //#region Retorno JSX
   return (
     <div className="Navegacao_Entre_Slides">
       <button onClick={Voltar_Slide} className="Botao_Slide_Anterior">
@@ -67,42 +195,49 @@ export default function Navegacao_Entre_Slides() {
       {Imagens_de_Slide.map((item) => {
         return (
           <>
-            {item.Id > 5 ? (
-              alert("Não é possível adicionar mais que 5 slides")
-            ) : (
-              <label
-                className="Barra_De_Navegacao_De_Imagem"
-                htmlFor={"Slide_" + item.Id}
-                key={item.Id + item.Imagem}
-                id={"Barra_De_Pesquisa_" + item.Id}
-                style={
-                  item.Id === 1
-                    ? { backgroundColor: "rgb(29, 29, 29)" }
-                    : { backgroundColor: "" }
-                }
-                onClick={() => {
-                  if (Ultima_Escolhida) {
-                    Ultima_Escolhida.style.backgroundColor = "";
-                  } else {
-                    document.getElementById(
-                      "Barra_De_Pesquisa_1"
-                    ).style.backgroundColor = "";
-                  }
-                  document.getElementById(
-                    "Barra_De_Pesquisa_" + item.Id
-                  ).style.backgroundColor = "rgb(29, 29, 29)";
-                  Ultima_Escolhida = document.getElementById(
-                    "Barra_De_Pesquisa_" + item.Id
-                  );
-                }}
-              ></label>
-            )}
+            <label
+              className="Barra_De_Navegacao_De_Imagem"
+              htmlFor={"Slide_" + item.Id}
+              key={item.Id + item.Imagem}
+              id={"Barra_De_Pesquisa_" + item.Id}
+              style={
+                item.Id === 1
+                  ? { backgroundColor: "rgb(29, 29, 29)" }
+                  : { backgroundColor: "" }
+              }
+              onClick={() => {
+                setTemporizador_Para_Troca_Automatica(10);
+                setTimeout(() => {
+                  var Todos_Os_Input_Radio_De_Navegacao =
+                    document.querySelectorAll(
+                      ".Input_Tipo_Radio_Alteracao_Slide"
+                    );
+
+                  Todos_Os_Input_Radio_De_Navegacao.forEach((item) => {
+                    var Label_Correspondente = document.getElementById(
+                      "Barra_De_Pesquisa_" + item.value
+                    );
+                    Label_Correspondente.style.backgroundColor = "";
+                    if (item.checked) {
+                      Label_Correspondente.style.backgroundColor =
+                        "rgb(29, 29, 29)";
+                    }
+                  });
+                }, 50);
+              }}
+            ></label>
           </>
         );
       })}
-      <button onClick={Avancar_Slide} className="Botao_Proximo_Slide">
+      <button
+        onClick={Avancar_Slide}
+        className="Botao_Proximo_Slide"
+        id="Botao_De_Avancar_Para_O_Proximo_Slide"
+      >
         {">"}
       </button>
     </div>
   );
+  //#endregion
 }
+//#endregion
